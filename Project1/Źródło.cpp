@@ -30,14 +30,25 @@ string liczba(int number,string tab[],string tab2[], string tab3[])
 
 }
 
-string high_liczba(string a, int num, string tab[], string tab2[], string tab4[])
+string high_liczba( int num, string tab[], string tab2[], string tab4[])
 {
-	string c = liczba(num/100, tab, tab2, tab4);
+	int index =1 ;
+	string c = liczba(num / 100, tab, tab2, tab4);
 	string d = liczba(num % 100, tab, tab2, tab4);
-		string words, coma;
-		coma = tab4[1];
-	words = c+coma+d;
+	string words, coma;
+	coma = tab4[index];
+	words = c + coma + d;
 	return words;
+};
+string t_liczba( int num, string tab[], string tab2[], string tab4[]){
+	string c = high_liczba(num / 1000, tab, tab2, tab4);
+	string d = high_liczba(num % 1000, tab, tab2, tab4);
+	string words, coma;
+	coma = tab4[1];
+	words = c + coma + d;
+	return words;
+
+
 };
 void print(string s)
 {
@@ -89,13 +100,19 @@ int main() {
 		cin >> num;
 		cout << "Twoja liczba to  : " << num << endl;
 		string out= liczba(num,help,tens,houndreds);
-		string out2 = high_liczba(out, num,help,tens,houndreds);
-		if (num > 100||num<1000)
+		string out2 = high_liczba( num,help,tens,houndreds);
+		string out3 = t_liczba(num, help, tens, houndreds);
+		if (num == 0) { 
+			print("zero");
+		}
+		else if (num > 99)
 		{
 			print(out2);
 		}
-		else
-		print(out);
+
+		else if (num < 99) {
+			print(out);
+		}
 		
 	} while (num != 999);
 	system("PAUSE");
